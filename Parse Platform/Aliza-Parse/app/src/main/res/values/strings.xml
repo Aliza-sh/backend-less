@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Aliza Parse</string>
+
+    <!--parse config-->
+    <string name="back4app_server_url">https://parseapi.back4app.com/</string>
+    <string name="back4app_app_id">6ZYfbFIvPWvqnbTMaWWF7Tw6h5AhXgWTaugaFPst</string>
+    <string name="back4app_client_key">bt6NRxPZm1CSjVBSudtVsfoJUiMj9019yrCS9AJw</string>
 </resources>
