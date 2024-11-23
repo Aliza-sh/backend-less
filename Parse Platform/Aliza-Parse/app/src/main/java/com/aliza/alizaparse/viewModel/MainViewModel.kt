@@ -11,6 +11,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.io.File
 
 class MainViewModel(private val repository: MainRepository) : ViewModel() {
 
@@ -88,6 +89,71 @@ class MainViewModel(private val repository: MainRepository) : ViewModel() {
             _emailVerifiedState.value = ParseRequest.Loading()
             val result = repository.checkEmailVerified()
             _emailVerifiedState.value = result
+        }
+    }
+
+    private val _loadProfilePictureState = MutableStateFlow<ParseRequest<File>>(ParseRequest.Idle())
+    val loadProfilePictureState: StateFlow<ParseRequest<File>> = _loadProfilePictureState
+    fun loadProfilePicture() {
+        viewModelScope.launch {
+            _loadProfilePictureState.value = ParseRequest.Loading()
+            val result = repository.getUserProfilePicture()
+            _loadProfilePictureState.value = result
+        }
+    }
+
+    private val _uploadProfilePictureState = MutableStateFlow<ParseRequest<ParseUser>>(ParseRequest.Idle())
+    val uploadProfilePictureState: StateFlow<ParseRequest<ParseUser>> = _uploadProfilePictureState
+    fun uploadProfilePicture(file: File) {
+        viewModelScope.launch {
+            _uploadProfilePictureState.value = ParseRequest.Loading()
+            val result = repository.uploadProfilePicture(file)
+            _uploadProfilePictureState.value = result
+        }
+    }
+
+    private val _userInfoState = MutableStateFlow<ParseRequest<ParseUser>>(ParseRequest.Idle())
+    val userInfoState: StateFlow<ParseRequest<ParseUser>> = _userInfoState
+    fun getUserInfo() {
+        viewModelScope.launch {
+            _userInfoState.value = ParseRequest.Loading()
+            val result = repository.getUserInfo()
+            _userInfoState.value = result
+        }
+    }
+
+    private val _updateUserInfoState = MutableStateFlow<ParseRequest<ParseUser>>(ParseRequest.Idle())
+    val updateUserInfoState: StateFlow<ParseRequest<ParseUser>> = _updateUserInfoState
+    fun updateUserInfo(
+        firstName: String,
+        lastName: String,
+        userName: String,
+        email: String
+    ) {
+        viewModelScope.launch {
+            _updateUserInfoState.value = ParseRequest.Loading()
+            val result = repository.updateUserInfo(firstName, lastName, userName, email)
+            _updateUserInfoState.value = result
+        }
+    }
+
+    private val _logOutState = MutableStateFlow<ParseRequest<Boolean>>(ParseRequest.Idle())
+    val logOutState: StateFlow<ParseRequest<Boolean>> = _logOutState
+    fun logOut() {
+        viewModelScope.launch {
+            _logOutState.value = ParseRequest.Loading()
+            val result = repository.logOut()
+            _logOutState.value = result
+        }
+    }
+
+    private val _deleteAccountState = MutableStateFlow<ParseRequest<Boolean>>(ParseRequest.Idle())
+    val deleteAccountState: StateFlow<ParseRequest<Boolean>> = _deleteAccountState
+    fun deleteAccount() {
+        viewModelScope.launch {
+            _deleteAccountState.value = ParseRequest.Loading()
+            val result = repository.deleteAccount()
+            _deleteAccountState.value = result
         }
     }
 }

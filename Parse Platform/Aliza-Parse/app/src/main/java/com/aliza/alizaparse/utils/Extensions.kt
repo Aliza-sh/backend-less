@@ -16,3 +16,7 @@ fun String.isValidEmail(): Boolean {
 fun String.isValidPassword(): Boolean {
     return this.length >= 6
 }
+
+fun File.toUri(): Uri {
+    return Uri.fromFile(this)
+}
