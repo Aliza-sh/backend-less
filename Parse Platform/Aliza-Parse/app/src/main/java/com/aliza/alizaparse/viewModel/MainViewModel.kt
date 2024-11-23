@@ -50,4 +50,34 @@ class MainViewModel(private val repository: MainRepository) : ViewModel() {
             _signUpState.value = result
         }
     }
+
+    private val _signInState = MutableStateFlow<ParseRequest<ParseUser>>(ParseRequest.Idle())
+    val signInState: StateFlow<ParseRequest<ParseUser>> = _signInState
+    fun signIn(username: String, password: String) {
+
+        if (username.isBlank()) {
+            _signInState.value = ParseRequest.Error("Username cannot be empty")
+            return
+        }
+        if (!password.isValidPassword()) {
+            _signInState.value = ParseRequest.Error("Password must be at least 6 characters.")
+            return
+        }
+
+        viewModelScope.launch {
+            _signInState.value = ParseRequest.Loading()
+            val result = repository.signIn(username, password)
+            _signInState.value = result
+        }
+    }
+
+    private val _resetPasswordState = MutableStateFlow<ParseRequest<ParseUser>>(ParseRequest.Idle())
+    val resetPasswordState: StateFlow<ParseRequest<ParseUser>> = _resetPasswordState
+    fun resetPassword(email: String) {
+        viewModelScope.launch {
+            _resetPasswordState.value = ParseRequest.Loading()
+            val result = repository.resetPassword(email)
+            _resetPasswordState.value = result
+        }
+    }
 }

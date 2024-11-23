@@ -43,4 +43,30 @@ class ApiService {
             }
         }
     }
+
+    suspend fun signIn(username: String, password: String): ParseRequest<ParseUser> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val user = ParseUser.logIn(username, password)
+                ParseResponse(user, null).generateResponse()
+            } catch (e: ParseException) {
+                ParseResponse(null, e).generateResponse()
+            } catch (e: Exception) {
+                ParseRequest.Error<ParseUser>("An unknown error occurred: ${e.localizedMessage}")
+            }
+        }
+    }
+
+    suspend fun resetPassword(email: String): ParseRequest<ParseUser> {
+        return withContext(Dispatchers.IO) {
+            try {
+                ParseUser.requestPasswordReset(email)
+                ParseResponse<ParseUser>(null, null).generateResponse()
+            } catch (e: ParseException) {
+                ParseResponse<ParseUser>(null, e).generateResponse()
+            } catch (e: Exception) {
+                ParseRequest.Error<ParseUser>("An unknown error occurred: ${e.localizedMessage}")
+            }
+        }
+    }
 }
