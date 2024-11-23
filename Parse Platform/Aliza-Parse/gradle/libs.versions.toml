@@ -1,5 +1,7 @@
 [versions]
 agp = "8.5.2"
+coilCompose = "2.5.0"
+constraintlayoutCompose = "1.0.1"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -10,9 +12,15 @@ activityCompose = "1.9.1"
 composeBom = "2024.04.01"
 
 parse = "4.3.0"
+navigationCompose = "2.8.1"
+koinAndroidxCompose = "4.0.0"
+koinAndroidxComposeNavigation = "4.0.0"
+ucrop = "2.2.8"
 
 [libraries]
+androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayoutCompose" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -28,6 +36,13 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 
 parse-platform = { group = "com.github.parse-community.Parse-SDK-Android", name = "parse", version.ref = "parse"}
+
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+
+koin-androidx-compose-navigation = { module = "io.insert-koin:koin-androidx-compose-navigation", version.ref = "koinAndroidxComposeNavigation" }
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxCompose" }
+
+ucrop = { module = "com.github.yalantis:ucrop", version.ref = "ucrop" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

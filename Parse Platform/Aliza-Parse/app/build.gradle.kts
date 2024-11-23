@@ -68,4 +68,17 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation (libs.parse.platform)
+
+    implementation (libs.androidx.constraintlayout.compose)
+
+    implementation(libs.androidx.navigation.compose)
+
+    implementation(libs.koin.androidx.compose)
+    implementation(libs.koin.androidx.compose.navigation)
+
+    implementation(libs.coil.compose)
+
+    implementation (libs.ucrop)
+
+
 }
