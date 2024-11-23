@@ -69,4 +69,21 @@ class ApiService {
             }
         }
     }
+
+    suspend fun checkEmailVerified(): ParseRequest<Boolean> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val user = getCurrentUser()
+                if (user!!.getBoolean("emailVerified")) {
+                    ParseRequest.Success(true)
+                } else {
+                    ParseRequest.Error("Email not verified yet.")
+                }
+            } catch (e: ParseException) {
+                ParseRequest.Error("Error checking email verification: ${e.localizedMessage}")
+            } catch (e: Exception) {
+                ParseRequest.Error("An unknown error occurred: ${e.localizedMessage}")
+            }
+        }
+    }
 }

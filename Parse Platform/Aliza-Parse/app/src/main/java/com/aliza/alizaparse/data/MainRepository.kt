@@ -26,4 +26,7 @@ class MainRepository(
         return apiService.resetPassword(email)
     }
 
+    suspend fun checkEmailVerified(): ParseRequest<Boolean> {
+        return apiService.checkEmailVerified()
+    }
 }

@@ -7,9 +7,11 @@ import androidx.navigation.compose.composable
 import com.aliza.alizaparse.ui.screens.signIn.SignInScreen
 import com.aliza.alizaparse.ui.screens.signUp.SignUpScreen
 import com.aliza.alizaparse.ui.screens.splash.SplashScreen
+import com.aliza.alizaparse.ui.screens.verify.VerifyScreen
 import com.aliza.alizaparse.utils.SIGN_IN_SCREEN
 import com.aliza.alizaparse.utils.SIGN_UP_SCREEN
 import com.aliza.alizaparse.utils.SPLASH_SCREEN
+import com.aliza.alizaparse.utils.VERIFY_SCREEN
 
 @Composable
 fun NavGraph(navController: NavHostController) {
@@ -31,6 +33,18 @@ fun NavGraph(navController: NavHostController) {
         composable(SIGN_IN_SCREEN) {
             SignInScreen {
                 navController.navigate(it)
+            }
+        }
+        composable(VERIFY_SCREEN) {
+            VerifyScreen {
+                if (it == "Back")
+                    navController.popBackStack()
+                else {
+                    while (navController.popBackStack()) {
+                        navController.popBackStack()
+                    }
+                    navController.navigate(it)
+                }
             }
         }
     }

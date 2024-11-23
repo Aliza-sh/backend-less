@@ -80,4 +80,14 @@ class MainViewModel(private val repository: MainRepository) : ViewModel() {
             _resetPasswordState.value = result
         }
     }
+
+    private val _emailVerifiedState = MutableStateFlow<ParseRequest<Boolean>>(ParseRequest.Idle())
+    val emailVerifiedState: StateFlow<ParseRequest<Boolean>> = _emailVerifiedState
+    fun checkEmailVerified() {
+        viewModelScope.launch {
+            _emailVerifiedState.value = ParseRequest.Loading()
+            val result = repository.checkEmailVerified()
+            _emailVerifiedState.value = result
+        }
+    }
 }
